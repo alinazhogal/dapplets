@@ -1,0 +1,8 @@
+.root {
+  background: linear-gradient(#b9fbff, #e3dcff);
+  @apply opacity-20 py-[18px];
+}
+
+.header {
+  @apply max-w-[1234px] w-full flex items-center justify-between mx-auto;
+}
