@@ -1,0 +1,12 @@
+.root {
+  @apply text-baseflex flex-col space-y-2.5;
+}
+
+.label {
+  @apply font-semibold text-gray-99;
+}
+
+.input {
+  @apply rounded-xl p-2.5;
+  box-shadow: 10px 10px 40px 0 #dee1e4;
+}
