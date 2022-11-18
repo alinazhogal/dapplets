@@ -1,0 +1,32 @@
+.root {
+  @apply flex space-x-5 py-3 px-5 items-center border border-white rounded-xl justify-between;
+  box-shadow: 10px 10px 40px 0 #dee1e4;
+}
+
+.img {
+  @apply border border-white rounded-xl;
+}
+
+.titleInfo {
+  @apply flex flex-col;
+}
+
+.title {
+  @apply text-base font-bold;
+}
+
+.numbers {
+  @apply text-xs text-gray-99;
+}
+
+.description {
+  @apply max-w-[270px] text-gray-56 w-full;
+}
+
+.author {
+  @apply min-w-[115px] text-gray-b;
+}
+
+.tags {
+  @apply flex flex-wrap max-w-[150px];
+}

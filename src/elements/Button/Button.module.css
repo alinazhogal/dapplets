@@ -1,0 +1,7 @@
+.root {
+  @apply px-5 py-[6px] uppercase bg-blue rounded-full text-white cursor-pointer;
+}
+
+.root:disabled {
+  @apply bg-gray-disabled;
+}

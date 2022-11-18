@@ -1,16 +1,23 @@
 import React from 'react'
+import { ReactComponent as Cloud } from '../../assets/cloud.svg'
+import { ReactComponent as Settings } from '../../assets/settings.svg'
 import styles from './Header.module.css'
 
 export const Header = () => {
   return (
     <header className={styles.root}>
+      <div className={styles.bg} />
       <div className={styles.header}>
-        <div>
-          <span>Extension state</span>
-          <span>Active</span>
+        <div className={styles.cloud}>
+          <Cloud />
+          <span className={styles.span}>Extension state: </span>
+          <span className='text-green font-medium'>Active</span>
         </div>
         <div>
-          <button>Settings</button>
+          <button className={styles.settings}>
+            <Settings className='mr-2.5' />
+            Settings
+          </button>
         </div>
       </div>
     </header>

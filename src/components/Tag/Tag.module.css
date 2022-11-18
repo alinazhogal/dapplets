@@ -1,0 +1,3 @@
+.root {
+  @apply font-medium text-white text-[10px] flex p-[2px] space-x-1 items-center bg-purple rounded-[4px];
+}

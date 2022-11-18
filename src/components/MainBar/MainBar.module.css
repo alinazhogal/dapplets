@@ -1,0 +1,17 @@
+.root {
+  @apply max-w-[1368px] w-full border-2 border-white rounded-xl px-5 py-6 relative;
+}
+
+.bg {
+  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
+  backdrop-filter: blur(15px);
+  @apply w-full h-full absolute top-0 left-0 -z-10 bg-transparent;
+}
+
+.search {
+  @apply flex space-x-5 items-center pb-5 border-b border-white;
+}
+
+.content {
+  @apply pt-5 space-y-5 flex flex-col;
+}

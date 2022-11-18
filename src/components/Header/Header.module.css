@@ -1,8 +1,25 @@
 .root {
-  background: linear-gradient(#b9fbff, #e3dcff);
-  @apply opacity-20 py-[18px];
+  @apply py-[18px] h-[54px] relative flex items-center;
+}
+
+.bg {
+  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
+  backdrop-filter: blur(15px);
+  @apply w-full h-full absolute top-0 left-0 -z-10 bg-transparent;
 }
 
 .header {
-  @apply max-w-[1234px] w-full flex items-center justify-between mx-auto;
+  @apply max-w-[1234px] w-full flex items-center justify-between mx-auto text-base;
+}
+
+.span {
+  @apply mr-2.5 text-gray-b ml-2.5;
+}
+
+.cloud {
+  @apply flex items-center;
+}
+
+.settings {
+  @apply flex items-center space-x-2.5 text-gray-56;
 }

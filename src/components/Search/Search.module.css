@@ -1,7 +1,13 @@
 .input {
-  @apply py-2.5 w-full rounded-xl;
+  @apply py-2.5 w-full px-9 bg-[#FAFAFA] rounded-xl ;
 }
 
 .root {
-  @apply max-w-[600px] w-full relative
+  @apply max-w-[600px] w-full relative rounded-xl ;
+  box-shadow: 10px 10px 40px 0 #CBD5E2;
+}
+
+.icon {
+  @apply absolute left-2.5 top-1/2;
+  transform: translateY(-50%);
 }
