@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from '../Button/Button'
 import styles from './Input.module.css'
 
 type Props = {
@@ -12,8 +13,9 @@ export const Input = ({ name, label, placeholder }: Props) => {
     <div className={styles.root}>
       <label htmlFor={name} className={styles.label}>
         {label}
+        <input name={name} id={name} className={styles.input} placeholder={placeholder} />
       </label>
-      <input name={name} id={name} className={styles.input} placeholder={placeholder} />
+      <Button variant='create'>Create</Button>
     </div>
   )
 }

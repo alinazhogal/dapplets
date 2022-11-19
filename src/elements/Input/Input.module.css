@@ -1,5 +1,5 @@
 .root {
-  @apply text-baseflex flex-col space-y-2.5;
+  @apply text-base flex items-end w-full space-x-2.5;
 }
 
 .label {
@@ -7,6 +7,10 @@
 }
 
 .input {
-  @apply rounded-xl p-2.5;
+  @apply rounded-xl p-2.5 text-base mt-2.5 w-[186px] font-normal text-black;
   box-shadow: 10px 10px 40px 0 #dee1e4;
+}
+
+.input::placeholder {
+  @apply text-black
 }

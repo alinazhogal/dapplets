@@ -1,15 +1,11 @@
 .root {
-  @apply py-[18px] h-[54px] relative flex items-center;
-}
-
-.bg {
-  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
+  @apply py-[18px] h-14 flex items-center sticky z-50 w-full;
   backdrop-filter: blur(15px);
-  @apply w-full h-full absolute top-0 left-0 -z-10 bg-transparent;
+  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
 }
 
 .header {
-  @apply max-w-[1234px] w-full flex items-center justify-between mx-auto text-base;
+  @apply w-full flex items-center justify-between text-base mx-auto max-w-[1332px] px-2.5 md:px-10 2xl:px-2;
 }
 
 .span {

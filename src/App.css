@@ -1,6 +1,0 @@
-.App {
-  @apply flex flex-col space-y-7;
-  background-image: url('./assets/BG.png');
-  background-size: auto auto;
-  background-repeat: no-repeat;
-}

@@ -1,4 +1,3 @@
-import React from 'react'
 import example from '../../assets/app-example.png'
 import { ReactComponent as Drag } from '../../assets/drag.svg'
 import { Button } from '../../elements/Button/Button'
@@ -23,7 +22,7 @@ export const AppItem = () => {
           <Tag title={title} key={i} />
         ))}
       </div>
-      <Button title='install' />
+      <Button>Install</Button>
     </div>
   )
 }

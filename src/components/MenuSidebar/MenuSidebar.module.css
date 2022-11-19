@@ -1,0 +1,22 @@
+.root {
+  @apply max-w-[360px] w-full h-screen flex flex-col pt-[86px]  border-2 border-white sticky pl-9;
+  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
+  backdrop-filter: blur(15px);
+}
+
+.logo {
+  @apply flex items-center justify-center;
+}
+
+.logoText {
+  @apply uppercase font-extrabold text-base relative;
+}
+
+.logoText::after {
+  content: '.';
+  @apply absolute bottom-0 text-[#C50140];
+}
+
+.logoToHide {
+  @apply w-full flex justify-between ml-2.5 mr-5 items-center
+}

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ReactComponent as SearchIcon } from '../../assets/search.svg'
 import styles from './Search.module.css'
 

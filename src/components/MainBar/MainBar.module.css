@@ -1,11 +1,7 @@
 .root {
-  @apply max-w-[1368px] w-full border-2 border-white rounded-xl px-5 py-6 relative;
-}
-
-.bg {
-  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
+  @apply max-w-[1380px] w-full border-2 border-white rounded-xl px-5 py-6 relative;
   backdrop-filter: blur(15px);
-  @apply w-full h-full absolute top-0 left-0 -z-10 bg-transparent;
+  background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
 }
 
 .search {
