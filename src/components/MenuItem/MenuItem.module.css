@@ -1,0 +1,24 @@
+.root {
+  @apply stroke-gray-56 text-gray-56 py-4 pl-9 flex items-center cursor-pointer transition-all ease-in-out duration-300 max-h-[56px];
+}
+
+.root:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.root:first-child {
+  @apply stroke-blue text-blue border-r-4 border-blue;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
+    rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(15px);
+}
+
+.span {
+  @apply ml-2.5 w-0 h-0 overflow-hidden transition-all ease-in-out duration-300;
+}
+
+.open {
+  @apply w-auto h-auto max-h-6;
+}

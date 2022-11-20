@@ -10,7 +10,7 @@ export const Layout = ({ children }: Props) => {
   return (
     <>
       <MenuSidebar />
-      <div className='relative w-full flex flex-col items-center'>
+      <div className='relative w-full flex flex-col'>
         <Header />
         <div className='px-5 mt-[76px]'>{children}</div>
       </div>
