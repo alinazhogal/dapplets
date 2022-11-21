@@ -4,14 +4,14 @@ import { getDapplets, getTags } from './actionCreator'
 
 export type DappletsState = {
   dapplets: Dapplet[]
-  allTags: Tag[]
+  tags: Tag[]
   isLoading: boolean
   error: string
 }
 
 const initialState: DappletsState = {
   dapplets: [],
-  allTags: [],
+  tags: [],
   isLoading: false,
   error: '',
 }
@@ -41,7 +41,7 @@ export const dappletsSlice = createSlice({
       state.dapplets = []
     },
     [getTags.fulfilled.type]: (state, action: PayloadAction<Tag[]>) => {
-      state.allTags = action.payload
+      state.tags = action.payload
     },
   },
 })

@@ -16,7 +16,7 @@ type Props = {
 
 export const AppItem = ({ dapplet, index }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const { allTags } = useAppSelector((state) => state.dapplets)
+  const { tags } = useAppSelector((state) => state.dapplets)
 
   const {
     id,
@@ -33,12 +33,13 @@ export const AppItem = ({ dapplet, index }: Props) => {
     text_7,
     text_8,
     text_9,
-    tags,
+    tags: tagsIndexesArr,
   } = dapplet
   const additionalInfo = [text_1, text_2, text_3, text_4, text_5, text_6, text_7, text_8, text_9]
-  const dappletTags: typeof allTags = []
-  for (const tag of tags) {
-    if (allTags[Number(tag)]) dappletTags.push(allTags[Number(tag)])
+
+  const dappletTags: typeof tags = []
+  for (const index of tagsIndexesArr) {
+    if (tags[Number(index)]) dappletTags.push(tags[Number(index)])
   }
 
   return (
