@@ -1,5 +1,5 @@
 .root {
-  @apply max-w-[320px] w-full h-screen flex-col pt-[86px] px-5 border-2 border-white sticky space-y-[30px] hidden 2xl:flex;
+  @apply max-w-[320px] w-full h-screen flex-col pt-[86px] px-5 border-2 border-white sticky space-y-[30px] hidden 2xl:flex top-0 bottom-0 left-0;
   background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
   backdrop-filter: blur(15px);
 }

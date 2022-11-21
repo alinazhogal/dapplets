@@ -1,5 +1,5 @@
 .root {
-  @apply max-w-[1380px] w-full border-2 border-white rounded-xl px-5 py-6 relative;
+  @apply max-w-[1380px] w-full border-2 border-white rounded-xl px-5 py-6 relative mx-auto;
   backdrop-filter: blur(15px);
   background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
 }

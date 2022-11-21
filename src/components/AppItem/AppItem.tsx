@@ -51,7 +51,7 @@ export const AppItem = ({ dapplet, index }: Props) => {
           {...provided.draggableProps}
         >
           <div className={styles.main}>
-            <div {...provided.dragHandleProps} className={styles.drag}>
+            <div className={styles.drag} {...provided.dragHandleProps}>
               <Drag />
             </div>
             <img className={styles.img} src={example} alt='app' width={50} height={50} />

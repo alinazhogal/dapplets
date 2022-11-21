@@ -1,5 +1,5 @@
 .root {
-  @apply py-[18px] h-14 flex items-center sticky z-50 w-full;
+  @apply py-[18px] h-14 flex items-center sticky top-0 z-50 w-full;
   backdrop-filter: blur(15px);
   background: linear-gradient(180deg, rgba(185, 251, 255, 0.2) 0%, rgba(227, 220, 255, 0.2) 100%);
 }

@@ -33,10 +33,12 @@ export const dappletsSlice = createSlice({
     [getDapplets.pending.type]: (state) => {
       state.isLoading = true
       state.error = ''
+      state.dapplets = []
     },
     [getDapplets.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
+      state.dapplets = []
     },
     [getTags.fulfilled.type]: (state, action: PayloadAction<Tag[]>) => {
       state.allTags = action.payload

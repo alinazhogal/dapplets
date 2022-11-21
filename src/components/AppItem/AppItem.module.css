@@ -21,11 +21,11 @@
 }
 
 .titleInfo {
-  @apply flex flex-col;
+  @apply flex flex-col max-w-[300px] w-full;
 }
 
 .title {
-  @apply text-base font-bold;
+  @apply text-base font-bold  text-ellipsis whitespace-nowrap overflow-hidden;
 }
 
 .numbers {
@@ -37,11 +37,11 @@
 }
 
 .author {
-  @apply min-w-[115px] text-gray-b;
+  @apply max-w-[150px] w-full text-gray-b text-ellipsis whitespace-nowrap overflow-hidden;
 }
 
 .tags {
-  @apply flex flex-wrap max-w-[140px] gap-y-[10px] gap-x-1;
+  @apply flex flex-wrap max-w-[140px] w-full gap-y-[10px] gap-x-1;
 }
 
 .accordeon {
