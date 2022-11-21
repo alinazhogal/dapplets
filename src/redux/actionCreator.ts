@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { Dapplet, Tag } from '../components/types/dapplet'
+import { Dapplet, Tag } from '../types/dapplet'
 
 export const getDapplets = createAsyncThunk(
   'dapplets/get',
@@ -23,8 +23,11 @@ export const getDapplets = createAsyncThunk(
   },
 )
 
-export const getTags = createAsyncThunk('dapplets/getTags', async (_, thunkAPI) => {
-  const response = await axios.get('https://dapplets-hiring-api.herokuapp.com/api/v1/tags')
-  console.log(response.data)
-  return response.data.data as Tag[]
+export const getTags = createAsyncThunk('dapplets/getTags', async () => {
+  try {
+    const response = await axios.get('https://dapplets-hiring-api.herokuapp.com/api/v1/tags')
+    return response.data.data as Tag[]
+  } catch (e) {
+    console.log(e.message)
+  }
 })

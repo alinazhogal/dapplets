@@ -1,5 +1,5 @@
 .root {
-  @apply flex flex-col py-3 px-5 border border-white rounded-xl cursor-pointer transition-all ease-in-out duration-500;
+  @apply flex flex-col py-3 px-5 border border-white rounded-xl cursor-pointer transition-all ease-in-out static;
   box-shadow: 10px 10px 40px 0 #dee1e4;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3);
@@ -13,6 +13,7 @@
 
 .drag {
   flex: 0 0 auto;
+  @apply py-2;
 }
 
 .img {
@@ -44,11 +45,11 @@
 }
 
 .accordeon {
-  @apply flex text-gray-56 mt-5 max-h-0 overflow-hidden transition-all ease-in-out duration-500;
+  @apply flex text-gray-56 mt-5 max-h-0 overflow-hidden transition-all ease-in-out;
 }
 
 .accordeonOpen {
-  @apply max-h-full
+  @apply max-h-full;
 }
 
 .text1 {

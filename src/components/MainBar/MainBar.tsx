@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import { Loader } from '../../elements/Loader/Loader'
 import { SortButton } from '../../elements/SortButton/SortButton'
 import { getDapplets } from '../../redux/actionCreator'
+import { setDapplets } from '../../redux/dappletsSlice'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { AppItem } from '../AppItem/AppItem'
 import { Search } from '../Search/Search'
@@ -10,7 +13,7 @@ export const MainBar = () => {
   const [sort, setSort] = useState<'DESC' | 'ASC'>('DESC')
   const [search, setSearch] = useState('')
   const dispatch = useAppDispatch()
-  const { dapplets } = useAppSelector((state) => state.dapplets)
+  const { dapplets, isLoading } = useAppSelector((state) => state.dapplets)
 
   const handleSortClick = () => {
     if (sort === 'DESC') {
@@ -30,6 +33,14 @@ export const MainBar = () => {
     dispatch(getDapplets({ sort, search }))
   }, [sort, search])
 
+  const handleDragEnd = (result: DropResult) => {
+    if (!result.destination) return
+    const items = Array.from(dapplets)
+    const [reorderedItem] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedItem)
+    dispatch(setDapplets(items))
+  }
+
   return (
     <div className={styles.root}>
       <div className={styles.search}>
@@ -38,11 +49,19 @@ export const MainBar = () => {
           {sort === 'DESC' ? 'Descending' : 'Ascending'}
         </SortButton>
       </div>
-      <div className={styles.content}>
-        {dapplets.map((dap) => (
-          <AppItem {...dap} key={dap.id} />
-        ))}
-      </div>
+      {isLoading && <Loader />}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId='list'>
+          {(provided) => (
+            <div className={styles.content} {...provided.droppableProps} ref={provided.innerRef}>
+              {dapplets.map((dap, index) => (
+                <AppItem dapplet={dap} index={index} key={dap.id} />
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </div>
   )
 }

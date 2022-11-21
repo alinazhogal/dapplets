@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Dapplet, Tag } from '../components/types/dapplet'
+import { Dapplet, Tag } from '../types/dapplet'
 import { getDapplets, getTags } from './actionCreator'
 
 export type DappletsState = {
