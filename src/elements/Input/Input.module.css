@@ -1,5 +1,5 @@
 .root {
-  @apply text-base flex items-end w-full space-x-2.5;
+  @apply text-base flex items-end w-full space-x-2.5 mb-[60px];
 }
 
 .label {

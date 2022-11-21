@@ -1,10 +1,18 @@
 .root {
-  @apply flex space-x-5 py-3 px-5 items-center border border-white rounded-xl justify-between;
+  @apply flex flex-col py-3 px-5 border border-white rounded-xl cursor-pointer transition-all ease-in-out duration-500;
   box-shadow: 10px 10px 40px 0 #dee1e4;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%),
     rgba(255, 255, 255, 0.3);
   box-shadow: 10px 10px 40px rgba(156, 185, 222, 0.1);
   backdrop-filter: blur(10px);
+}
+
+.main {
+  @apply flex space-x-5 justify-between items-center;
+}
+
+.drag {
+  flex: 0 0 auto;
 }
 
 .img {
@@ -33,4 +41,24 @@
 
 .tags {
   @apply flex flex-wrap max-w-[140px] gap-y-[10px] gap-x-1;
+}
+
+.accordeon {
+  @apply flex text-gray-56 mt-5 max-h-0 overflow-hidden transition-all ease-in-out duration-500;
+}
+
+.accordeonOpen {
+  @apply max-h-full
+}
+
+.text1 {
+  @apply mx-[30px];
+}
+
+.texts {
+  @apply flex flex-wrap flex-col gap-[30px] max-h-[170px] w-full overflow-hidden;
+}
+
+.p {
+  @apply max-w-[400px] w-auto;
 }
