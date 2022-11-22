@@ -2,10 +2,6 @@
   @apply px-5 py-[6px] uppercase bg-blue rounded-full text-white cursor-pointer font-medium text-sm;
 }
 
-.root:disabled {
-  @apply bg-gray-disabled;
-}
-
 .create {
   @apply py-3 rounded-xl;
 }

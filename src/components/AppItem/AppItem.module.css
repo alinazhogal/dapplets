@@ -21,11 +21,11 @@
 }
 
 .titleInfo {
-  @apply flex flex-col max-w-[300px] w-full;
+  @apply flex flex-col max-w-[240px] 2xl:max-w-[300px] w-full;
 }
 
 .title {
-  @apply text-base font-bold  text-ellipsis whitespace-nowrap overflow-hidden;
+  @apply text-base font-bold text-ellipsis whitespace-nowrap overflow-hidden;
 }
 
 .numbers {
@@ -62,4 +62,8 @@
 
 .p {
   @apply max-w-[400px] w-auto;
+}
+
+.disabled {
+  @apply bg-gray-disabled;
 }

@@ -1,13 +1,22 @@
 import cn from 'clsx'
+import React from 'react'
 import styles from './Button.module.css'
 
 type Props = {
   children: string
   variant?: 'install' | 'create'
   className?: string
+  disabled?: boolean
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export const Button = ({ children, variant = 'install', className }: Props) => {
+export const Button = ({
+  children,
+  variant = 'install',
+  className,
+  disabled = false,
+  onClick,
+}: Props) => {
   const rootClassName = cn(
     styles.root,
     {
@@ -15,5 +24,9 @@ export const Button = ({ children, variant = 'install', className }: Props) => {
     },
     className,
   )
-  return <button className={rootClassName}>{children}</button>
+  return (
+    <button disabled={disabled} className={rootClassName} onClick={onClick}>
+      {children}
+    </button>
+  )
 }

@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import cn from 'clsx'
-import example from '../../assets/app-example.png'
 import { ReactComponent as Drag } from '../../assets/drag.svg'
 import { Button } from '../../elements/Button/Button'
 import { Dapplet } from '../../types/dapplet'
 import { Tag } from '../Tag/Tag'
+import example from '../../assets/app-example.png'
 import styles from './AppItem.module.css'
 import { useAppSelector } from '../../redux/hooks'
 import { Draggable } from 'react-beautiful-dnd'
+import useWindowDimensions from '../../helpers/useWindowDimension'
+import { workWithStorage } from '../../helpers/storage'
 
 type Props = {
   dapplet: Dapplet
@@ -15,13 +17,11 @@ type Props = {
 }
 
 export const AppItem = ({ dapplet, index }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const { tags } = useAppSelector((state) => state.dapplets)
-
   const {
     id,
     title,
     author,
+    icon,
     address,
     description,
     text_1,
@@ -35,16 +35,41 @@ export const AppItem = ({ dapplet, index }: Props) => {
     text_9,
     tags: tagsIndexesArr,
   } = dapplet
+
+  const [isOpen, setIsOpen] = useState(false)
+  const [installed, setInstalled] = useState(workWithStorage('getInstalled', id))
+  const { width } = useWindowDimensions()
+  const { tags } = useAppSelector((state) => state.dapplets)
+
+  const hideAddress = width < 1500
+
   const additionalInfo = [text_1, text_2, text_3, text_4, text_5, text_6, text_7, text_8, text_9]
 
-  const dappletTags: typeof tags = []
-  for (const index of tagsIndexesArr) {
-    if (tags[Number(index)]) dappletTags.push(tags[Number(index)])
+  const dappletTags = tags.filter(({ id }) => tagsIndexesArr.includes(id))
+
+  // const fetchImage = async () => {
+  //   try {
+  //     const img = axios.get(`https://dapplets-hiring-api.herokuapp.com/api/v1/files/${icon}`)
+  //     return img
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
+  const onInstallClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    if (installed) {
+      workWithStorage('deleteInstalled', id)
+      setInstalled(false)
+    } else {
+      workWithStorage('setInstalled', id)
+      setInstalled(true)
+    }
   }
 
   return (
     <Draggable draggableId={id} index={index}>
-      {(provided, snapshot) => (
+      {(provided) => (
         <div
           className={styles.root}
           onClick={() => setIsOpen(!isOpen)}
@@ -58,7 +83,9 @@ export const AppItem = ({ dapplet, index }: Props) => {
             <img className={styles.img} src={example} alt='app' width={50} height={50} />
             <div className={styles.titleInfo}>
               <h4 className={styles.title}>{title}</h4>
-              <p className={styles.numbers}>{address}</p>
+              <p className={styles.numbers}>
+                {hideAddress ? `${address.slice(0, 4)}...${address.slice(-4)}` : address}
+              </p>
             </div>
             <p className={styles.description}>{description}</p>
             <span className={styles.author}>{author}</span>
@@ -67,7 +94,9 @@ export const AppItem = ({ dapplet, index }: Props) => {
                 <Tag title={name} key={id} />
               ))}
             </div>
-            <Button>Install</Button>
+            <Button onClick={onInstallClick} className={installed ? styles.disabled : ''}>
+              {installed ? 'Installed' : 'Install'}
+            </Button>
           </div>
           {isOpen && (
             <div className={cn(styles.accordeon, isOpen && styles.accordeonOpen)}>

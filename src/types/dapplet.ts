@@ -21,3 +21,9 @@ export type Tag = {
   id: string
   name: string
 }
+
+export type ResponseData<T> = {
+  success: boolean
+  data?: T[]
+  message?: string
+}

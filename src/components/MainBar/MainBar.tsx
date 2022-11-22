@@ -8,6 +8,7 @@ import { setDapplets } from '../../redux/dappletsSlice'
 import { AppItem } from '../AppItem/AppItem'
 import { Search } from '../Search/Search'
 import styles from './MainBar.module.css'
+import debounce from '../../helpers/debounce'
 
 export const MainBar = () => {
   const [sort, setSort] = useState<'DESC' | 'ASC'>('DESC')
@@ -20,17 +21,20 @@ export const MainBar = () => {
       setSort('ASC')
     } else setSort('DESC')
   }
-  console.log(error)
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
   }
 
   useEffect(() => {
+    if (!window.localStorage.getItem('installed')) {
+      window.localStorage.setItem('installed', JSON.stringify({}))
+    }
     dispatch(getDapplets({ sort }))
   }, [])
 
   useEffect(() => {
-    dispatch(getDapplets({ sort, search }))
+    debounce(() => dispatch(getDapplets({ sort, search })))
   }, [sort, search])
 
   const handleDragEnd = (result: DropResult) => {
@@ -49,7 +53,6 @@ export const MainBar = () => {
           {sort === 'DESC' ? 'Descending' : 'Ascending'}
         </SortButton>
       </div>
-      {error && <div>ERROR</div>}
       {isLoading && <Loader />}
       {dapplets.length !== 0 && (
         <DragDropContext onDragEnd={handleDragEnd}>
