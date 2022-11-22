@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import cn from 'clsx'
 import { ReactComponent as Drag } from '../../assets/drag.svg'
 import { Button } from '../../elements/Button/Button'
@@ -10,6 +10,8 @@ import { useAppSelector } from '../../redux/hooks'
 import { Draggable } from 'react-beautiful-dnd'
 import useWindowDimensions from '../../helpers/useWindowDimension'
 import { workWithStorage } from '../../helpers/storage'
+import { api } from '../../api'
+import { LoadingDots } from '../LoadingDots/LoadingDots'
 
 type Props = {
   dapplet: Dapplet
@@ -37,6 +39,8 @@ export const AppItem = ({ dapplet, index }: Props) => {
   } = dapplet
 
   const [isOpen, setIsOpen] = useState(false)
+  const [img, setImg] = useState('')
+  const [imgLoading, setImgLoading] = useState(false)
   const [installed, setInstalled] = useState(workWithStorage('getInstalled', id))
   const { width } = useWindowDimensions()
   const { tags } = useAppSelector((state) => state.dapplets)
@@ -47,14 +51,21 @@ export const AppItem = ({ dapplet, index }: Props) => {
 
   const dappletTags = tags.filter(({ id }) => tagsIndexesArr.includes(id))
 
-  // const fetchImage = async () => {
-  //   try {
-  //     const img = axios.get(`https://dapplets-hiring-api.herokuapp.com/api/v1/files/${icon}`)
-  //     return img
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        setImgLoading(true)
+        await api.get(`files/${icon}`)
+        setImg(`https://dapplets-hiring-api.herokuapp.com/api/v1/files/${icon}`)
+      } catch {
+        setImg('')
+      } finally {
+        setImgLoading(false)
+      }
+    }
+
+    fetchImage()
+  }, [])
 
   const onInstallClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
@@ -80,7 +91,15 @@ export const AppItem = ({ dapplet, index }: Props) => {
             <div className={styles.drag} {...provided.dragHandleProps}>
               <Drag />
             </div>
-            <img className={styles.img} src={example} alt='app' width={50} height={50} />
+            <div className={styles.imgContainer}>
+              {imgLoading ? (
+                <LoadingDots />
+              ) : img ? (
+                <img className={styles.img} src={img} alt='app' width={50} height={50} />
+              ) : (
+                'no img'
+              )}
+            </div>
             <div className={styles.titleInfo}>
               <h4 className={styles.title}>{title}</h4>
               <p className={styles.numbers}>

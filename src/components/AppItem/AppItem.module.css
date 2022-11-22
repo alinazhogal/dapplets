@@ -16,8 +16,13 @@
   @apply py-2;
 }
 
+.imgContainer {
+  @apply w-[50px] h-[50px] border border-white rounded-xl bg-gray-200 overflow-hidden flex justify-center items-center;
+  flex: 0 0 auto;
+}
+
 .img {
-  @apply border border-white rounded-xl;
+  @apply w-full h-full;
 }
 
 .titleInfo {

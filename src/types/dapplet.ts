@@ -22,8 +22,8 @@ export type Tag = {
   name: string
 }
 
-export type ResponseData<T> = {
+export type ResponseData = {
   success: boolean
-  data?: T[]
+  data: Dapplet[]
   message?: string
 }
