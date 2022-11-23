@@ -38,7 +38,7 @@ export const AppItem = ({ dapplet, index }: Props) => {
   } = dapplet
 
   const [isOpen, setIsOpen] = useState(false)
-  const [img, setImg] = useState('')
+  const [img, setImg] = useState('https://gildasclubgr.org/wp-content/uploads/2019/02/no-image.jpg')
   const [imgLoading, setImgLoading] = useState(false)
   const [installed, setInstalled] = useState(workWithStorage('getInstalled', id))
   const { width } = useWindowDimensions()
@@ -50,21 +50,21 @@ export const AppItem = ({ dapplet, index }: Props) => {
 
   const dappletTags = tags.filter(({ id }) => tagsIndexesArr.includes(id))
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        setImgLoading(true)
-        await api.get(`files/${icon}`)
-        setImg(`https://dapplets-hiring-api.herokuapp.com/api/v1/files/${icon}`)
-      } catch {
-        setImg('https://gildasclubgr.org/wp-content/uploads/2019/02/no-image.jpg')
-      } finally {
-        setImgLoading(false)
-      }
-    }
+  // useEffect(() => {
+  //   const fetchImage = async () => {
+  //     try {
+  //       setImgLoading(true)
+  //       await api.get(`files/${icon}`)
+  //       setImg(`https://dapplets-hiring-api.herokuapp.com/api/v1/files/${icon}`)
+  //     } catch {
+  //       setImg('https://gildasclubgr.org/wp-content/uploads/2019/02/no-image.jpg')
+  //     } finally {
+  //       setImgLoading(false)
+  //     }
+  //   }
 
-    fetchImage()
-  }, [])
+  //   fetchImage()
+  // }, [])
 
   const onInstallClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()

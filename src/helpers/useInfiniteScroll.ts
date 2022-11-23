@@ -6,7 +6,7 @@ function useInfiniteScroll() {
 
   const handleObserver = useCallback((entries) => {
     const [target] = entries
-    if (target.isIntersecting) {
+    if (target.isIntersecting && Math.floor(target.intersectionRatio) === 1) {
       setStart((prev) => prev + 20)
     }
   }, [])
@@ -14,7 +14,7 @@ function useInfiniteScroll() {
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: '0px',
+      rootMargin: '-20px',
       threshold: 0.1,
     }
 

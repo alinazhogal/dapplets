@@ -32,10 +32,12 @@ export const MainBar = () => {
     }
   }, [search, sort])
 
-  // useEffect(() => {
-  //   dispatch(getDapplets({ sort, search, start }))
-  // }, [start])
-  console.log(loadMoreRef.current)
+  useEffect(() => {
+    if (dapplets.length) {
+      dispatch(getDapplets({ sort, search, start }))
+    }
+  }, [start])
+
   const handleSortClick = () => {
     if (sort === 'DESC') {
       setSort('ASC')
@@ -66,18 +68,24 @@ export const MainBar = () => {
       {error && <div className={styles.error}>Error occured. Try again</div>}
       {isLoading && dapplets.length === 0 && <Loader />}
       {dapplets.length !== 0 && (
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <Droppable droppableId='list'>
-            {(provided) => (
-              <div className={styles.content} {...provided.droppableProps} ref={provided.innerRef}>
-                {dapplets.map((dap, index) => (
-                  <AppItem dapplet={dap} index={index} key={dap.id} />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
+        <div>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId='list'>
+              {(provided) => (
+                <div
+                  className={styles.content}
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {dapplets.map((dap, index) => (
+                    <AppItem dapplet={dap} index={index} key={dap.id} />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+        </div>
       )}
       <div ref={loadMoreRef} />
       {isLoading && dapplets.length !== 0 && <Loader />}
