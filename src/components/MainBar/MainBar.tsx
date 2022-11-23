@@ -53,8 +53,11 @@ export const MainBar = () => {
           {sort === 'DESC' ? 'Descending' : 'Ascending'}
         </SortButton>
       </div>
+      {error && <div className={styles.error}>Error occured. Try again</div>}
       {isLoading && <Loader />}
-      {dapplets.length !== 0 && (
+      {dapplets.length === 0 ? (
+        <div className={styles.nodata}>No dapplets found</div>
+      ) : (
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId='list'>
             {(provided) => (

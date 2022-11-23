@@ -11,3 +11,11 @@
 .content {
   @apply pt-5 space-y-5 flex flex-col;
 }
+
+.error {
+  @apply text-red-600 text-center p-5 text-xl;
+}
+
+.nodata {
+  @apply text-center p-5 text-xl;
+}

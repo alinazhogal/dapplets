@@ -4,7 +4,6 @@ import { ReactComponent as Drag } from '../../assets/drag.svg'
 import { Button } from '../../elements/Button/Button'
 import { Dapplet } from '../../types/dapplet'
 import { Tag } from '../Tag/Tag'
-import example from '../../assets/app-example.png'
 import styles from './AppItem.module.css'
 import { useAppSelector } from '../../redux/hooks'
 import { Draggable } from 'react-beautiful-dnd'
@@ -58,7 +57,7 @@ export const AppItem = ({ dapplet, index }: Props) => {
         await api.get(`files/${icon}`)
         setImg(`https://dapplets-hiring-api.herokuapp.com/api/v1/files/${icon}`)
       } catch {
-        setImg('')
+        setImg('https://gildasclubgr.org/wp-content/uploads/2019/02/no-image.jpg')
       } finally {
         setImgLoading(false)
       }
@@ -94,10 +93,8 @@ export const AppItem = ({ dapplet, index }: Props) => {
             <div className={styles.imgContainer}>
               {imgLoading ? (
                 <LoadingDots />
-              ) : img ? (
-                <img className={styles.img} src={img} alt='app' width={50} height={50} />
               ) : (
-                'no img'
+                <img className={styles.img} src={img} alt='app' width={50} height={50} />
               )}
             </div>
             <div className={styles.titleInfo}>

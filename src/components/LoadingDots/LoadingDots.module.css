@@ -3,8 +3,8 @@
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background-color: #9880ff;
-  color: #9880ff;
+  background-color: #0085FF;
+  color: #0085FF;
   animation: dotFlashing 1s infinite linear alternate;
   animation-delay: .5s;
 }
@@ -21,8 +21,8 @@
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background-color: #9880ff;
-  color: #9880ff;
+  background-color: #0085FF;
+  color: #0085FF;
   animation: dotFlashing 1s infinite alternate;
   animation-delay: 0s;
 }
@@ -32,18 +32,18 @@
   width: 6px;
   height: 6px;
   border-radius: 3px;
-  background-color: #9880ff;
-  color: #9880ff;
+  background-color: #0085FF;
+  color: #0085FF;
   animation: dotFlashing 1s infinite alternate;
   animation-delay: 1s;
 }
 
 @keyframes dotFlashing {
   0% {
-    background-color: #9880ff;
+    background-color: #0085FF;
   }
   50%,
   100% {
-    background-color: #ebe6ff;
+    background-color: #A3C9ED;
   }
 }

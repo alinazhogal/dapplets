@@ -17,7 +17,7 @@
 }
 
 .imgContainer {
-  @apply w-[50px] h-[50px] border border-white rounded-xl bg-gray-200 overflow-hidden flex justify-center items-center;
+  @apply w-[50px] h-[50px] border border-white rounded-xl overflow-hidden flex justify-center items-center;
   flex: 0 0 auto;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .accordeon {
-  @apply flex text-gray-56 mt-5 max-h-0 overflow-hidden transition-all ease-in-out;
+  @apply flex text-gray-56 mt-5 max-h-0 overflow-hidden transition-all ease-in-out pl-5;
 }
 
 .accordeonOpen {

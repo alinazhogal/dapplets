@@ -18,9 +18,9 @@ export const getDapplets = createAsyncThunk(
       return response.data
     } catch (e) {
       if (typeof e === 'string') {
-        rejectWithValue(e)
+        return rejectWithValue(e)
       } else if (e instanceof Error) {
-        rejectWithValue(e.message)
+        return rejectWithValue(e.message)
       }
     }
   },
