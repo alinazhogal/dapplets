@@ -28,7 +28,8 @@ export const dappletsSlice = createSlice({
     [getDapplets.fulfilled.type]: (state, action: PayloadAction<Dapplet[]>) => {
       state.isLoading = false
       state.error = ''
-      state.dapplets = action.payload
+      state.dapplets.push(...action.payload)
+      // state.dapplets = action.payload
     },
     [getDapplets.pending.type]: (state) => {
       state.isLoading = true

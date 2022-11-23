@@ -6,9 +6,12 @@ import { Tag } from '../types/dapplet'
 
 export const getDapplets = createAsyncThunk(
   'dapplets/get',
-  async ({ search, sort }: { search?: string; sort?: string }, { rejectWithValue }) => {
+  async (
+    { search, sort, start }: { search?: string; sort?: string; start?: number },
+    { rejectWithValue },
+  ) => {
     try {
-      const response = await fetchDapplets(search, sort)
+      const response = await fetchDapplets(search, sort, start)
       if (search) {
         const fuse = new Fuse(response.data, {
           keys: ['title'],

@@ -9,22 +9,14 @@ import { AppItem } from '../AppItem/AppItem'
 import { Search } from '../Search/Search'
 import styles from './MainBar.module.css'
 import debounce from '../../helpers/debounce'
+import useInfiniteScroll from '../../helpers/useInfiniteScroll'
 
 export const MainBar = () => {
   const [sort, setSort] = useState<'DESC' | 'ASC'>('DESC')
   const [search, setSearch] = useState('')
+  const { loadMoreRef, start } = useInfiniteScroll()
   const dispatch = useAppDispatch()
   const { dapplets, isLoading, error } = useAppSelector((state) => state.dapplets)
-
-  const handleSortClick = () => {
-    if (sort === 'DESC') {
-      setSort('ASC')
-    } else setSort('DESC')
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value)
-  }
 
   useEffect(() => {
     if (!window.localStorage.getItem('installed')) {
@@ -34,9 +26,27 @@ export const MainBar = () => {
   }, [])
 
   useEffect(() => {
-    debounce(() => dispatch(getDapplets({ sort, search })))
-  }, [sort, search])
+    if (dapplets.length) {
+      dispatch(setDapplets([]))
+      debounce(() => dispatch(getDapplets({ sort, search })))
+    }
+  }, [search, sort])
 
+  // useEffect(() => {
+  //   dispatch(getDapplets({ sort, search, start }))
+  // }, [start])
+  console.log(loadMoreRef.current)
+  const handleSortClick = () => {
+    if (sort === 'DESC') {
+      setSort('ASC')
+    } else setSort('DESC')
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value)
+  }
+  console.log(loadMoreRef.current)
+  console.log(start)
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return
     const items = Array.from(dapplets)
@@ -54,10 +64,8 @@ export const MainBar = () => {
         </SortButton>
       </div>
       {error && <div className={styles.error}>Error occured. Try again</div>}
-      {isLoading && <Loader />}
-      {dapplets.length === 0 ? (
-        <div className={styles.nodata}>No dapplets found</div>
-      ) : (
+      {isLoading && dapplets.length === 0 && <Loader />}
+      {dapplets.length !== 0 && (
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId='list'>
             {(provided) => (
@@ -71,6 +79,8 @@ export const MainBar = () => {
           </Droppable>
         </DragDropContext>
       )}
+      <div ref={loadMoreRef} />
+      {isLoading && dapplets.length !== 0 && <Loader />}
     </div>
   )
 }

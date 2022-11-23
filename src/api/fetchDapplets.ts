@@ -1,11 +1,11 @@
 import { api } from '.'
 import { ResponseData } from '../types/dapplet'
 
-export const fetchDapplets = async (search?: string, sort?: string) => {
+export const fetchDapplets = async (search?: string, sort?: string, start?: number) => {
   const response = await api.get('dapplets', {
     params: {
       limit: 20,
-      start: 0,
+      start: start || 0,
       ...(search && {
         filter: JSON.stringify([
           {
