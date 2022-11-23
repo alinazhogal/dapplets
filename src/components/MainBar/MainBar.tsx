@@ -14,7 +14,7 @@ import useInfiniteScroll from '../../helpers/useInfiniteScroll'
 export const MainBar = () => {
   const [sort, setSort] = useState<'DESC' | 'ASC'>('DESC')
   const [search, setSearch] = useState('')
-  const { loadMoreRef, start } = useInfiniteScroll()
+  const { loadMoreRef, start, setStart } = useInfiniteScroll()
   const dispatch = useAppDispatch()
   const { dapplets, isLoading, error } = useAppSelector((state) => state.dapplets)
 
@@ -29,6 +29,7 @@ export const MainBar = () => {
     if (dapplets.length) {
       dispatch(setDapplets([]))
       debounce(() => dispatch(getDapplets({ sort, search })))
+      setStart(-20)
     }
   }, [search, sort])
 
@@ -47,8 +48,7 @@ export const MainBar = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value)
   }
-  console.log(loadMoreRef.current)
-  console.log(start)
+
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return
     const items = Array.from(dapplets)
@@ -66,29 +66,22 @@ export const MainBar = () => {
         </SortButton>
       </div>
       {error && <div className={styles.error}>Error occured. Try again</div>}
-      {isLoading && dapplets.length === 0 && <Loader />}
       {dapplets.length !== 0 && (
-        <div>
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId='list'>
-              {(provided) => (
-                <div
-                  className={styles.content}
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {dapplets.map((dap, index) => (
-                    <AppItem dapplet={dap} index={index} key={dap.id} />
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </div>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId='list'>
+            {(provided) => (
+              <div className={styles.content} {...provided.droppableProps} ref={provided.innerRef}>
+                {dapplets.map((dap, index) => (
+                  <AppItem dapplet={dap} index={index} key={dap.id} />
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       )}
       <div ref={loadMoreRef} />
-      {isLoading && dapplets.length !== 0 && <Loader />}
+      {isLoading && <Loader />}
     </div>
   )
 }

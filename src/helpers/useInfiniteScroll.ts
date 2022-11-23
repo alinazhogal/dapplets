@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 
 function useInfiniteScroll() {
-  const [start, setStart] = useState(0)
+  const [start, setStart] = useState(-20)
   const loadMoreRef = useRef(null)
 
-  const handleObserver = useCallback((entries) => {
+  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
     const [target] = entries
-    if (target.isIntersecting && Math.floor(target.intersectionRatio) === 1) {
+    if (target.isIntersecting) {
       setStart((prev) => prev + 20)
     }
   }, [])
@@ -14,8 +14,8 @@ function useInfiniteScroll() {
   useEffect(() => {
     const option = {
       root: null,
-      rootMargin: '-20px',
-      threshold: 0.1,
+      rootMargin: '0px',
+      threshold: 0,
     }
 
     const observer = new IntersectionObserver(handleObserver, option)
@@ -23,8 +23,7 @@ function useInfiniteScroll() {
     if (loadMoreRef.current) observer.observe(loadMoreRef.current)
   }, [handleObserver])
 
-  return { loadMoreRef, start }
+  return { loadMoreRef, start, setStart }
 }
 
 export default useInfiniteScroll
-// IntersectionObserverEntry[]
