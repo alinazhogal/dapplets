@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { Loader } from '../../elements/Loader/Loader'
@@ -14,7 +14,9 @@ import useInfiniteScroll from '../../helpers/useInfiniteScroll'
 export const MainBar = () => {
   const [sort, setSort] = useState<'DESC' | 'ASC'>('DESC')
   const [search, setSearch] = useState('')
+  const isMounted = useRef(false)
   const { loadMoreRef, start, setStart } = useInfiniteScroll()
+
   const dispatch = useAppDispatch()
   const { dapplets, isLoading, error } = useAppSelector((state) => state.dapplets)
 
@@ -26,10 +28,12 @@ export const MainBar = () => {
   }, [])
 
   useEffect(() => {
-    if (dapplets.length) {
+    if (isMounted.current) {
       dispatch(setDapplets([]))
       debounce(() => dispatch(getDapplets({ sort, search })))
-      setStart(-20)
+      setStart(0)
+    } else {
+      isMounted.current = true
     }
   }, [search, sort])
 
@@ -38,6 +42,8 @@ export const MainBar = () => {
       dispatch(getDapplets({ sort, search, start }))
     }
   }, [start])
+
+  console.log(start, loadMoreRef.current)
 
   const handleSortClick = () => {
     if (sort === 'DESC') {
