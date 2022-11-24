@@ -39,10 +39,16 @@
 
 .description {
   @apply max-w-[270px] text-gray-56 w-full;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .author {
-  @apply max-w-[150px] w-full text-gray-b text-ellipsis whitespace-nowrap overflow-hidden;
+  @apply max-w-[150px] w-full text-gray-b text-ellipsis whitespace-nowrap overflow-hidden hidden xl:block;
 }
 
 .tags {

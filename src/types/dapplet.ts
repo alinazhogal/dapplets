@@ -26,4 +26,5 @@ export type ResponseData = {
   success: boolean
   data: Dapplet[]
   message?: string
+  total: number
 }

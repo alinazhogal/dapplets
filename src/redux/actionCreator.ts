@@ -16,9 +16,9 @@ export const getDapplets = createAsyncThunk(
         const fuse = new Fuse(response.data, {
           keys: ['title'],
         })
-        return fuse.search(search).map((i) => i.item)
+        return { data: fuse.search(search).map((i) => i.item), total: response.total }
       }
-      return response.data
+      return response
     } catch (e) {
       if (typeof e === 'string') {
         return rejectWithValue(e)

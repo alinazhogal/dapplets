@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Dapplet, Tag } from '../types/dapplet'
+import { Dapplet, ResponseData, Tag } from '../types/dapplet'
 import { getDapplets, getTags } from './actionCreator'
 
 export type DappletsState = {
@@ -7,6 +7,7 @@ export type DappletsState = {
   tags: Tag[]
   isLoading: boolean
   error: string
+  total: number
 }
 
 const initialState: DappletsState = {
@@ -14,6 +15,7 @@ const initialState: DappletsState = {
   tags: [],
   isLoading: false,
   error: '',
+  total: 0,
 }
 
 export const dappletsSlice = createSlice({
@@ -25,19 +27,22 @@ export const dappletsSlice = createSlice({
     },
   },
   extraReducers: {
-    [getDapplets.fulfilled.type]: (state, action: PayloadAction<Dapplet[]>) => {
+    [getDapplets.fulfilled.type]: (state, action: PayloadAction<ResponseData>) => {
       state.isLoading = false
       state.error = ''
-      state.dapplets.push(...action.payload)
+      state.dapplets.push(...action.payload.data)
+      state.total = action.payload.total
     },
     [getDapplets.pending.type]: (state) => {
       state.isLoading = true
       state.error = ''
+      state.total = 0
     },
     [getDapplets.rejected.type]: (state, action: PayloadAction<string>) => {
       state.isLoading = false
       state.error = action.payload
       state.dapplets = []
+      state.total = 0
     },
     [getTags.fulfilled.type]: (state, action: PayloadAction<Tag[]>) => {
       state.tags = action.payload

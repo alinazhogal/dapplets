@@ -1,29 +1,34 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 function useInfiniteScroll() {
-  const [start, setStart] = useState(-20)
-  const loadMoreRef = useRef(null)
+  const [start, setStart] = useState(0)
+  const [lastElement, setLastElement] = useState<HTMLDivElement | null>(null)
 
-  const handleObserver = useCallback((entries: IntersectionObserverEntry[]) => {
-    const [target] = entries
-    if (target.isIntersecting) {
-      setStart((prev) => prev + 20)
-    }
-  }, [])
+  const observer = useRef(
+    new IntersectionObserver((entries) => {
+      const first = entries[0]
+      if (first.isIntersecting) {
+        setStart((no) => no + 20)
+      }
+    }),
+  )
 
   useEffect(() => {
-    const option = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0,
+    const currentElement = lastElement
+    const currentObserver = observer.current
+
+    if (currentElement) {
+      currentObserver.observe(currentElement)
     }
 
-    const observer = new IntersectionObserver(handleObserver, option)
+    return () => {
+      if (currentElement) {
+        currentObserver.unobserve(currentElement)
+      }
+    }
+  }, [lastElement])
 
-    if (loadMoreRef.current) observer.observe(loadMoreRef.current)
-  }, [handleObserver])
-
-  return { loadMoreRef, start, setStart }
+  return { setLastElement, start, setStart }
 }
 
 export default useInfiniteScroll
